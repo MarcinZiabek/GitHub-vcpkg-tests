@@ -14,26 +14,11 @@ jobs:
         shell: bash    
 
       - name: Set VCPKG_ROOT environment variable
-        continue-on-error: true
         run: |
           cd ${{ github.workspace }}
           git clone https://github.com/Microsoft/vcpkg.git
           ./vcpkg/bootstrap-vcpkg.sh
           echo $VCPKG_ROOT
-          sudo vcpkg install --recurse
+          vcpkg install --recurse
         shell: bash    
 
-      - name: Set VCPKG_ROOT environment variable
-        continue-on-error: true
-        run: |
-          cd ${{ github.workspace }}
-          mkdir logs
-          cp /usr/local/share/vcpkg/buildtrees/icu/ logs -r
-        shell: bash  
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: Build Package
-          path: |
-            **/*.log
