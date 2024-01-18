@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Set VCPKG_ROOT environment variable
+        continue-on-error: true
         run: |
           cd ${{ github.workspace }}
           git clone https://github.com/Microsoft/vcpkg.git
@@ -17,8 +18,17 @@ jobs:
           vcpkg install --recurse
         shell: bash    
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Set VCPKG_ROOT environment variable
+        continue-on-error: true
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          cd ${{ github.workspace }}
+          mkdir logs
+          cp /usr/local/share/vcpkg/buildtrees/icu/ logs
+        shell: bash  
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build Package
+          path: |
+            **/*.log
