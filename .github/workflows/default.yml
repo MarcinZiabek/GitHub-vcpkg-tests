@@ -20,7 +20,7 @@ jobs:
           git clone https://github.com/Microsoft/vcpkg.git
           ./vcpkg/bootstrap-vcpkg.sh
           echo $VCPKG_ROOT
-          vcpkg install --recurse
+          sudo vcpkg install --recurse
         shell: bash    
 
       - name: Set VCPKG_ROOT environment variable
