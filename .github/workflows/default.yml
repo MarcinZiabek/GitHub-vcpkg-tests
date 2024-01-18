@@ -24,7 +24,7 @@ jobs:
         shell: bash
 
       - name: Install MacOS Dependencies
-        if: ${{ matrix.environment == 'ubuntu-latest' }}
+        if: ${{ matrix.environment == 'macos-latest' }}
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           brew install automake
