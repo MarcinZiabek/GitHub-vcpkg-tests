@@ -13,16 +13,17 @@ jobs:
           - windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Download sources
+        uses: actions/checkout@v3
 
-      - name: Set VCPKG_ROOT environment variable
+      - name: Install Linux Dependencies
         if: ${{ matrix.environment == 'ubuntu-latest' }}
         run: |
           sudo apt-get install autoconf-archive
           sudo apt-get install freeglut3-dev
         shell: bash    
 
-      - name: Set VCPKG_ROOT environment variable
+      - name: Setup VCPKG + Install Dependencies
         continue-on-error: true
         run: |
           cd ${{ github.workspace }}
@@ -32,7 +33,13 @@ jobs:
           sudo vcpkg install --recurse
         shell: bash    
 
-      - name: Set VCPKG_ROOT environment variable
+      - name: MacOS ICU errors
+        if: ${{ matrix.environment == 'macos-latest' }}
+        run: |
+          cat /usr/local/share/vcpkg/buildtrees/icu/autoconf-x64-osx-err.log
+        shell: bash    
+
+      - name: Linux SKIA errors
         run: |
           cat /usr/local/share/vcpkg/buildtrees/skia/build-x64-linux-dbg-out.log
         shell: bash    
