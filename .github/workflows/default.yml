@@ -18,6 +18,7 @@ jobs:
         if: ${{ matrix.environment == 'ubuntu-latest' }}
         run: |
           sudo apt-get install autoconf-archive
+          sudo apt-get install freeglut3-dev
         shell: bash    
 
       - name: Set VCPKG_ROOT environment variable
