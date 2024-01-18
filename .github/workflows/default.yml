@@ -3,12 +3,19 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.environment }}
+    strategy:
+      matrix:
+        environment:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
 
     steps:
       - uses: actions/checkout@v3
 
       - name: Set VCPKG_ROOT environment variable
+        if: ${{ matrix.environment == 'ubuntu-latest' }}
         run: |
           sudo apt-get install autoconf-archive
         shell: bash    
