@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "my-application",
   "version": "0.15.2",
-  "builtin-baseline": "fb9cd249f442dcc6d023e41ec7cb7f85622dd8b6",
+  "builtin-baseline": "97dd26728e3856ed1ab62ee74ee3a391d9c81d19",
   "dependencies": [
     {
       "name": "skia",
