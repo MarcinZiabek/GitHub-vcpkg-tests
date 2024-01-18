@@ -49,16 +49,3 @@ jobs:
         continue-on-error: true
         run: vcpkg install --recurse
         shell: bash    
-
-      - name: MacOS ICU errors
-        if: ${{ matrix.environment == 'macos-latest' }}
-        run: |
-          cat /usr/local/share/vcpkg/buildtrees/icu/config-x64-osx-dbg-config.log
-          cat /usr/local/share/vcpkg/buildtrees/icu/config-x64-osx-dbg-out.log
-          cat /usr/local/share/vcpkg/buildtrees/icu/config-x64-osx-dbg-err.log
-        shell: bash    
-
-      - name: Linux SKIA errors
-        run: |
-          cat /usr/local/share/vcpkg/buildtrees/skia/build-x64-linux-dbg-out.log
-        shell: bash    
