@@ -21,15 +21,19 @@ jobs:
         run: |
           sudo apt-get install autoconf-archive
           sudo apt-get install freeglut3-dev
+        shell: bash
+
+      - name: Install MacOS Dependencies
+        if: ${{ matrix.environment == 'ubuntu-latest' }}
+        run: |
+          brew install automake
         shell: bash    
 
       - name: Setup VCPKG + Install Dependencies
         continue-on-error: true
         run: |
-          cd ${{ github.workspace }}
           git clone https://github.com/Microsoft/vcpkg.git
           ./vcpkg/bootstrap-vcpkg.sh
-          echo $VCPKG_ROOT
           sudo vcpkg install --recurse
         shell: bash    
 
