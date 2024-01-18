@@ -28,14 +28,26 @@ jobs:
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           brew install automake
+          brew install autoconf-archive
         shell: bash    
 
-      - name: Setup VCPKG + Install Dependencies
+      - name: Setup VCPKG
         continue-on-error: true
         run: |
           git clone https://github.com/Microsoft/vcpkg.git
           ./vcpkg/bootstrap-vcpkg.sh
-          sudo vcpkg install --recurse
+        shell: bash    
+
+      - name: Install VCPKG Dependencies (Linux + MacOS)
+        if: ${{ matrix.environment != 'windows-latest' }}
+        continue-on-error: true
+        run: sudo vcpkg install --recurse
+        shell: bash    
+
+      - name: Install VCPKG Dependencies (Windows)
+        if: ${{ matrix.environment == 'windows-latest' }}
+        continue-on-error: true
+        run: vcpkg install --recurse
         shell: bash    
 
       - name: MacOS ICU errors
