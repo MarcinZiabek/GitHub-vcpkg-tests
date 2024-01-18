@@ -41,7 +41,9 @@ jobs:
       - name: MacOS ICU errors
         if: ${{ matrix.environment == 'macos-latest' }}
         run: |
-          cat /usr/local/share/vcpkg/buildtrees/icu/autoconf-x64-osx-err.log
+          cat /usr/local/share/vcpkg/buildtrees/icu/config-x64-osx-dbg-config.log
+          cat /usr/local/share/vcpkg/buildtrees/icu/config-x64-osx-dbg-out.log
+          cat /usr/local/share/vcpkg/buildtrees/icu/config-x64-osx-dbg-err.log
         shell: bash    
 
       - name: Linux SKIA errors
