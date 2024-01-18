@@ -10,7 +10,7 @@ jobs:
 
       - name: Set VCPKG_ROOT environment variable
         run: |
-          apt-get install autoconf-archive
+          sudo apt-get install autoconf-archive
         shell: bash    
 
       - name: Set VCPKG_ROOT environment variable
